@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Engineering Factory — Крипта Автоматонов</title>
+<title>Крипта Автоматонов — AI Factory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
@@ -11,108 +11,176 @@
 :root{
   --bg:#0b0908; --panel:#14100d; --panel2:#1b150f;
   --gold:#c8a35a; --gold-hi:#e8c880; --gold-dim:#8a6d38;
-  --ink:#d8cdb8; --mut:#9a8a6d; --blood:#7e1f1f; --mana:#3a6ea8;
+  --ink:#d8cdb8; --mut:#9a8a6d; --blood:#7e1f1f; --green:#3f7a3f;
   --line:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
 }
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{
-  margin:0;color:var(--ink);
-  font:17px/1.7 "EB Garamond",Georgia,serif;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200,163,90,.08), transparent),
-    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(126,31,31,.10), transparent),
-    var(--bg);
-}
-/* зернистая текстура поверх всего */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.055;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-header,main,footer{max-width:820px;margin:0 auto;padding:1.6rem 1.2rem}
-h1,h2,h3,.rune{font-family:"Cinzel",serif;letter-spacing:.06em}
-h1{
-  font-size:clamp(1.7rem,5vw,2.6rem);font-weight:900;text-align:center;margin:.4rem 0 0;
-  color:var(--gold-hi);
-  text-shadow:0 0 18px rgba(200,163,90,.35),0 2px 2px #000;
-}
-.sub{
-  text-align:center;color:var(--mut);font-style:italic;margin:.6rem 0 1.2rem;font-size:1.08rem;
-}
-.rune{ /* орнамент-разделитель */
-  text-align:center;color:var(--gold-dim);margin:1.6rem 0;
-  display:flex;align-items:center;gap:1rem;font-size:.9rem;
-}
+body{margin:0;color:var(--ink);font:17px/1.7 "EB Garamond",Georgia,serif;
+  background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,163,90,.08),transparent),
+             radial-gradient(ellipse 60% 40% at 85% 110%,rgba(126,31,31,.10),transparent),var(--bg)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+header,main,footer{max-width:880px;margin:0 auto;padding:1.4rem 1.2rem}
+h1,h2,h3,.rune,button,input{font-family:"Cinzel",serif;letter-spacing:.05em}
+h1{font-size:clamp(1.6rem,5vw,2.5rem);font-weight:900;text-align:center;margin:.3rem 0 0;color:var(--gold-hi);
+  text-shadow:0 0 18px rgba(200,163,90,.35),0 2px 2px #000;animation:ember 3.2s ease-in-out infinite}
+@keyframes ember{0%,100%{opacity:.8}50%{opacity:1;text-shadow:0 0 24px rgba(232,200,128,.55)}}
+.sub{text-align:center;color:var(--mut);font-style:italic;margin:.5rem 0 1rem}
+.rune{text-align:center;color:var(--gold-dim);margin:1.3rem 0;display:flex;align-items:center;gap:1rem;font-size:.9rem}
 .rune::before,.rune::after{content:"";flex:1;height:1px;background:var(--line)}
 .rune span{white-space:nowrap}
-h2{
-  font-size:1.15rem;color:var(--gold);margin:2.2rem 0 .7rem;text-transform:uppercase;font-weight:700;
-  text-shadow:0 1px 0 #000;
-}
+h2{font-size:1.12rem;color:var(--gold);margin:2rem 0 .7rem;text-transform:uppercase;font-weight:700;text-shadow:0 1px 0 #000}
 p{margin:.55rem 0}
 a{color:var(--gold-hi);text-decoration:none;border-bottom:1px dotted var(--gold-dim)}
 a:hover{color:#fff;text-shadow:0 0 10px rgba(232,200,128,.6)}
-code{
-  font:0.9rem/1.5 "Cinzel",serif;color:var(--gold-hi);
-  background:rgba(200,163,90,.08);border:1px solid rgba(200,163,90,.18);
-  padding:.1rem .45rem;border-radius:3px;
-}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.2rem 0}
-.card{
-  position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));
-  border:1px solid rgba(200,163,90,.22);padding:1.1rem 1.1rem 1.2rem;
-  box-shadow:0 6px 18px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,200,128,.08);
-  clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px);
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-.card:hover{
-  transform:translateY(-3px);border-color:rgba(232,200,128,.55);
-  box-shadow:0 10px 26px rgba(0,0,0,.75), 0 0 22px rgba(200,163,90,.16), inset 0 1px 0 rgba(232,200,128,.14);
-}
-.card h3{margin:.1rem 0 .45rem;font-size:1.02rem;color:var(--gold-hi)}
-.card p{margin:0;color:var(--mut);font-size:.98rem}
-.gate{
-  border-left:3px solid var(--blood);background:rgba(126,31,31,.08);
-  padding:.8rem 1rem;margin:1rem 0;font-style:italic;
-}
-footer{
-  color:var(--mut);font-size:.88rem;text-align:center;margin-top:2.5rem;padding-top:1.4rem;
-  border-top:1px solid transparent;border-image:var(--line) 1;
-}
-@keyframes ember{0%,100%{opacity:.75}50%{opacity:1;text-shadow:0 0 22px rgba(232,200,128,.55)}}
-.title-ember{animation:ember 3.2s ease-in-out infinite}
+code{font:0.88rem/1.4 ui-monospace,Consolas,monospace;color:var(--gold-hi);background:rgba(200,163,90,.08);
+  border:1px solid rgba(200,163,90,.18);padding:.08rem .4rem;border-radius:3px;overflow-wrap:anywhere}
+
+/* live-панель */
+#live{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin:.8rem 0}
+.chip{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(200,163,90,.25);
+  padding:.5rem 1rem;font-size:.92rem;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
+.chip b{color:var(--gold-hi)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.dot.ok{background:#63c563;box-shadow:0 0 8px #63c563}
+.dot.wait{background:#d8a33a;box-shadow:0 0 8px #d8a33a;animation:ember 1.6s infinite}
+.dot.bad{background:#c54a4a;box-shadow:0 0 8px #c54a4a}
+
+/* роли: фильтр+карточки */
+#roleFilter{width:100%;max-width:420px;margin:.4rem auto 1.2rem;display:block;padding:.55rem .9rem;
+  background:var(--panel);border:1px solid var(--gold-dim);color:var(--ink);font-size:1rem;border-radius:4px}
+#roleFilter:focus{outline:none;border-color:var(--gold-hi);box-shadow:0 0 12px rgba(200,163,90,.25)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+.card{position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(200,163,90,.22);
+  padding:1rem 1.05rem 1.1rem;box-shadow:0 6px 18px rgba(0,0,0,.6),inset 0 1px 0 rgba(232,200,128,.08);
+  clip-path:polygon(14px 0,calc(100%-14px) 0,100% 14px,100% calc(100%-14px),calc(100%-14px) 100%,14px 100%,0 calc(100%-14px),0 14px);
+  transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-3px);border-color:rgba(232,200,128,.55);box-shadow:0 10px 26px rgba(0,0,0,.75),0 0 22px rgba(200,163,90,.16)}
+.card h3{margin:.1rem 0 .35rem;font-size:1rem;color:var(--gold-hi)}
+.card .role-id{color:var(--gold-dim);font-size:.78rem;font-family:"Cinzel",serif;margin-right:.4rem}
+.card p{margin:0;color:var(--mut);font-size:.95rem}
+.hidden{display:none}
+
+.gate{border-left:3px solid var(--blood);background:rgba(126,31,31,.08);padding:.8rem 1rem;margin:1rem 0;font-style:italic}
+
+/* команды: copy */
+.cmd{display:flex;align-items:center;gap:.6rem;margin:.45rem 0;flex-wrap:wrap}
+.cmd code{flex:1}
+button{cursor:pointer;background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--gold-hi);
+  border:1px solid var(--gold-dim);padding:.3rem .8rem;font-size:.8rem;border-radius:4px;transition:all .15s}
+button:hover{border-color:var(--gold-hi);box-shadow:0 0 10px rgba(200,163,90,.3);color:#fff}
+button.copied{color:#7ecf7e;border-color:#7ecf7e}
+
+footer{color:var(--mut);font-size:.88rem;text-align:center;margin-top:2.2rem;padding-top:1.2rem;border-top:1px solid transparent;border-image:var(--line) 1}
 </style>
 </head>
 <body>
 <header>
-  <h1 class="title-ember">КРИПТА АВТОМАТОНОВ</h1>
-  <p class="sub">AI Engineering Factory — там, где задачи обретают форму, а код — душу</p>
-  <div class="rune"><span>⚔ РОЛИ ⚔ ЦИКЛ ⚔ ГЕЙТЫ ⚔</span></div>
+  <h1>КРИПТА АВТОМАТОНОВ</h1>
+  <p class="sub">Личная фабрика разработки: задача → агенты → PR → проверка → релиз. Мерж — всегда человек.</p>
+  <div class="rune"><span>⚔ 22 СЛУГИ ⚔ ЦИКЛ ⚔ ГЕЙТЫ ⚔</span></div>
 </header>
 <main>
-  <div class="grid">
-    <div class="card"><h3>XXII Слуг Крипты</h3><p>Исполнитель, Тестировщик, Ревизор, Охранник, Факел, Фактчек, Механик, Санитар, Гейм-мастер, Глашатай — у каждого своё ремесло.</p></div>
-    <div class="card"><h3>Вечный Цикл</h3><p>Клеймо задачи на GitHub — и слуги сами куют: worktree, правки, pull request, испытания CI.</p></div>
-    <div class="card"><h3>Гейты Правосудия</h3><p>Факел бдит, чтобы никто не ослабил испытания. Фактчек требует первоисточника. Пепел не выдаёт себя за золото.</p></div>
-    <div class="card"><h3>Очи и Длани</h3><p>OCR-зрение для свитков-изображений, взор в сеть (search/fetch), мосты в Roblox и Blender, вестник Telegram.</p></div>
+
+  <div id="live">
+    <div class="chip"><span class="dot wait"></span><span id="lv-commit">сверяю архивы…</span></div>
+    <div class="chip"><span class="dot wait"></span>Сборка Pages: <b id="lv-pages">?</b></div>
+    <div class="chip"><span class="dot ok"></span>Испытания ролей: <b>13/13</b></div>
   </div>
 
-  <h2>Как куется решение</h2>
-  <p>Владыка оставляет метку — issue с клеймом <code>opencode</code>. Ночной страж подхватывает её, вырезает отдельную келью-worktree и пробуждает слугу-Исполнителя без свидетелей. Слуга изучает свод репозитория, вносит правку, запечатывает слова <code>closes&nbsp;#N</code> и выставляет творение на суд — pull request. Испытания CI сверяют металл. И лишь затем владыка взглядом решает: слить или отвергнуть.</p>
+  <h2>Слуги Крипты (живой справочник)</h2>
+  <input id="roleFilter" type="search" placeholder="Поиск по имени или ремеслу — напр. «ревью» или «секреты»…" aria-label="Поиск ролей">
+  <div class="grid" id="roles"></div>
 
+  <h2>Заповеди</h2>
+  <p><strong>Не изрекай ложного.</strong> Каждое слово — со свидетелем: файл и строка, лог, зонд. Нет свидетеля — «не проверено».</p>
+  <p><strong>Экономия казны.</strong> Подписочные кредиты; оркестраторы с API-биллингом не оскверняют расчёты.</p>
+  <p><strong>Броня по умолчанию.</strong> Дозволения — списком, публикация — с подтверждения, инъекции отражены.</p>
   <div class="gate">Ни один слуга не смеет сам венчать работу слиянием. Финальный гейт принадлежит человеку — всегда.</div>
 
-  <h2>Заповеди Крипты</h2>
-  <p><strong>Не изрекай ложного.</strong> Каждое слово — со свидетелем: файл и строка, лог, зонд. Нет свидетеля — говори «не проверено».</p>
-  <p><strong>Экономия крови и золота.</strong> Кредиты подписочные; никакие оркестраторы с API-биллингом не осквернят казну.</p>
-  <p><strong>Броня по умолчанию.</strong> Дозволения — списком, публикация — с подтверждения, инъекции из чужих свитков — отражены.</p>
+  <h2>Команды владельцу (кликни — скопируется)</h2>
+  <div class="cmd"><code>oc-roles</code><button data-copy="oc-roles">КОПИРОВАТЬ</button></div>
+  <div class="cmd"><code>oc-agent fact-check "Проверь утверждение: …"</code><button data-copy='oc-agent fact-check &quot;Проверь: …&quot;'>КОПИРОВАТЬ</button></div>
+  <div class="cmd"><code>oc-agent gate-keeper "правка X — ок или блокер?"</code><button data-copy='oc-agent gate-keeper &quot;ок или блокер?&quot;'>КОПИРОВАТЬ</button></div>
+  <div class="cmd"><code>oc-img C:\путь\к\картинке.png</code><button data-copy="oc-img">КОПИРОВАТЬ</button></div>
+  <div class="cmd"><code>oc-eval -All</code><button data-copy="oc-eval -All">КОПИРОВАТЬ</button></div>
+  <div class="cmd"><code>oc-kit; gh issue create --label opencode -t "Задача" -b "ТЗ"</code><button data-copy='oc-kit; gh issue create --label opencode -t &quot;Задача&quot; -b &quot;ТЗ&quot;'>КОПИРОВАТЬ</button></div>
 
-  <h2>Свиток Состояния</h2>
-  <p>Крипта развёрнута и обкатана живыми PR; хроника испытаний ролей — 13 из 13 золотых задач. Полный свод заповедей хранится в репозитории фабрики (<code>FACTORY.md</code>).</p>
+  <h2>Как куется решение</h2>
+  <p>Владыка оставляет метку — issue с клеймом <code>opencode</code>. Ночной страж подхватывает её, вырезает келью-worktree и пробуждает слугу-Исполнителя. Слуга изучает свод, вносит правку, запечатывает <code>closes #N</code> и выставляет творение на суд — pull request. Испытания CI сверяют металл. Взгляд владыки решает: слить или отвергнуть.</p>
 </main>
 <footer>
   <div class="rune"><span>†</span></div>
-  <p>Личная крипта владыки. Возводится и обновляется слугой-Глашатаем через git push в ветку Pages.</p>
+  <p>Личная крипта. Возводится и обновляется Глашатаем через git push. Живые данные — GitHub API.</p>
 </footer>
+
+<script>
+// ── справочник ролей: имя, id, описание (источник: FACTORY.md, eval 13/13) ──
+const ROLES=[
+ ["Исполнитель","implementer","код по чёткой задаче"],
+ ["Тестировщик","tester","только тесты; исходники не правит"],
+ ["Сыск","debugger","корень бага по минимальному репро"],
+ ["Ревизор","reviewer","ревью дифа; каждому мнению — файл:строка"],
+ ["Охранник","security","CWE/OWASP-чек по дифу"],
+ ["Факел","gate-keeper","анти-reward-hacking: гейты и тесты не тронуты"],
+ ["Исследователь","researcher","источники и даты; нет источника — «не проверено»"],
+ ["Фактчек","fact-check","перепроверка по первоисточникам"],
+ ["Аналитик","analyst","расчёты, воспроизводимые скриптом"],
+ ["Писатель","writer","черновик по плану, без новых фактов"],
+ ["Редактор","editor-agent","форма текста; факты не вводит"],
+ ["Аварийный","incident","упавший прогон: причина, откат, слова человеку"],
+ ["Маршрутизатор","router","подбирает цепочку слуг под задачу"],
+ ["Механик","ops","инфраструктура: зонд → минимальная правка → откат"],
+ ["Санитар","secret-scanner","секреты перед облаком; читает — не удаляет"],
+ ["Зелибоба-235B","wide-zeliboba","широкий контекст; приёмник handover"],
+ ["Гейм-мастер","game-dev","Roblox и Blender: игры и ассеты"],
+ ["Глашатай","publisher","посты и сайт; только по «публикуй»"],
+ ["Зодчий PoE2","poe2-builder","билды и оценки Path of Exile 2"],
+ ["Торговец PoE2","poe2-trader","цены и торговля Path of Exile 2"],
+ ["Небиджа","nebidjadarklum","ветеран: архитектура, security, legacy"]
+];
+const g=document.getElementById("roles");
+function render(list){
+  g.innerHTML="";
+  for(const [ru,id,desc] of list){
+    const d=document.createElement("div");d.className="card";
+    d.innerHTML=`<h3><span class="role-id">${id}</span>${ru}</h3><p>${desc}</p>`;
+    g.appendChild(d);
+  }
+  if(!list.length) g.innerHTML='<div class="card"><p>Такого слуги в крипте нет — не выдумываем.</p></div>';
+}
+render(ROLES);
+const f=document.getElementById("roleFilter");
+f.addEventListener("input",()=>{const q=f.value.trim().toLowerCase();
+  render(ROLES.filter(r=>r.join(" ").toLowerCase().includes(q)));});
+
+// ── copy-to-clipboard ──
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("button[data-copy]");if(!b)return;
+  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="СКОПИРОВАНО ✓";b.classList.add("copied");
+    setTimeout(()=>{b.textContent="КОПИРОВАТЬ";b.classList.remove("copied")},1600);}
+  catch{b.textContent="Ctrl+C вручную";}
+});
+
+// ── живые данные с GitHub API (публичный репо, анонимный лимит 60/ч) ──
+(async()=>{
+  const base="https://api.github.com/repos/WarnetBes/agent-kit-site";
+  const set=(id,html,dotCls)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;
+    const d=el?.closest(".chip")?.querySelector(".dot");if(d)d.className="dot "+dotCls;};
+  try{
+    const c=await fetch(base+"/commits?per_page=1").then(r=>r.json());
+    const sha=(c[0]?.sha??"").slice(0,7);
+    const date=c[0]?.commit?.committer?.date?new Date(c[0].commit.committer.date).toLocaleString("ru"):"?";
+    set("lv-commit",`Последний коммит: <b>${sha}</b> · ${date}`,"ok");
+  }catch{set("lv-commit","архив недоступен (лимит API)","wait");}
+  try{
+    const p=await fetch(base+"/pages/builds?per_page=1").then(r=>r.json());
+    const st=p[0]?.status??"?";
+    const cls=st==="built"?"ok":st==="errored"?"bad":"wait";
+    set("lv-pages",st==="built"?"исправна":"идёт…",cls);
+  }catch{set("lv-pages","?","wait");}
+})();
+</script>
 </body>
 </html>
