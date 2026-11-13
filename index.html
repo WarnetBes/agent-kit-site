@@ -3,50 +3,116 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Engineering Factory — личная фабрика разработки</title>
+<title>AI Engineering Factory — Крипта Автоматонов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1a1c20;--mut:#5b6470;--acc:#1454f4;--bg:#fbfcfe}
+:root{
+  --bg:#0b0908; --panel:#14100d; --panel2:#1b150f;
+  --gold:#c8a35a; --gold-hi:#e8c880; --gold-dim:#8a6d38;
+  --ink:#d8cdb8; --mut:#9a8a6d; --blood:#7e1f1f; --mana:#3a6ea8;
+  --line:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
+}
 *{box-sizing:border-box}
-body{margin:0;font:16px/1.6 system-ui,sans-serif;color:var(--ink);background:var(--bg)}
-header,main,footer{max-width:760px;margin:0 auto;padding:1.2rem}
-h1{font-size:1.7rem;margin:.2rem 0}
-.sub{color:var(--mut);margin:0 0 1.5rem}
-h2{font-size:1.25rem;margin-top:2rem}
-a{color:var(--acc)}
-code,pre{font:0.92rem/1.5 ui-monospace,monospace;background:#eef1f6;padding:.15rem .35rem;border-radius:4px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1rem 0}
-.card{border:1px solid #dfe3ea;border-radius:10px;padding:1rem;background:#fff}
-.card h3{margin:.1rem 0 .4rem;font-size:1.02rem}
-.card p{margin:0;color:var(--mut);font-size:.92rem}
-footer{color:var(--mut);font-size:.85rem;border-top:1px solid #e5e8ee;margin-top:2.5rem}
+html{background:var(--bg)}
+body{
+  margin:0;color:var(--ink);
+  font:17px/1.7 "EB Garamond",Georgia,serif;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200,163,90,.08), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(126,31,31,.10), transparent),
+    var(--bg);
+}
+/* зернистая текстура поверх всего */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+header,main,footer{max-width:820px;margin:0 auto;padding:1.6rem 1.2rem}
+h1,h2,h3,.rune{font-family:"Cinzel",serif;letter-spacing:.06em}
+h1{
+  font-size:clamp(1.7rem,5vw,2.6rem);font-weight:900;text-align:center;margin:.4rem 0 0;
+  color:var(--gold-hi);
+  text-shadow:0 0 18px rgba(200,163,90,.35),0 2px 2px #000;
+}
+.sub{
+  text-align:center;color:var(--mut);font-style:italic;margin:.6rem 0 1.2rem;font-size:1.08rem;
+}
+.rune{ /* орнамент-разделитель */
+  text-align:center;color:var(--gold-dim);margin:1.6rem 0;
+  display:flex;align-items:center;gap:1rem;font-size:.9rem;
+}
+.rune::before,.rune::after{content:"";flex:1;height:1px;background:var(--line)}
+.rune span{white-space:nowrap}
+h2{
+  font-size:1.15rem;color:var(--gold);margin:2.2rem 0 .7rem;text-transform:uppercase;font-weight:700;
+  text-shadow:0 1px 0 #000;
+}
+p{margin:.55rem 0}
+a{color:var(--gold-hi);text-decoration:none;border-bottom:1px dotted var(--gold-dim)}
+a:hover{color:#fff;text-shadow:0 0 10px rgba(232,200,128,.6)}
+code{
+  font:0.9rem/1.5 "Cinzel",serif;color:var(--gold-hi);
+  background:rgba(200,163,90,.08);border:1px solid rgba(200,163,90,.18);
+  padding:.1rem .45rem;border-radius:3px;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.2rem 0}
+.card{
+  position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));
+  border:1px solid rgba(200,163,90,.22);padding:1.1rem 1.1rem 1.2rem;
+  box-shadow:0 6px 18px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,200,128,.08);
+  clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{
+  transform:translateY(-3px);border-color:rgba(232,200,128,.55);
+  box-shadow:0 10px 26px rgba(0,0,0,.75), 0 0 22px rgba(200,163,90,.16), inset 0 1px 0 rgba(232,200,128,.14);
+}
+.card h3{margin:.1rem 0 .45rem;font-size:1.02rem;color:var(--gold-hi)}
+.card p{margin:0;color:var(--mut);font-size:.98rem}
+.gate{
+  border-left:3px solid var(--blood);background:rgba(126,31,31,.08);
+  padding:.8rem 1rem;margin:1rem 0;font-style:italic;
+}
+footer{
+  color:var(--mut);font-size:.88rem;text-align:center;margin-top:2.5rem;padding-top:1.4rem;
+  border-top:1px solid transparent;border-image:var(--line) 1;
+}
+@keyframes ember{0%,100%{opacity:.75}50%{opacity:1;text-shadow:0 0 22px rgba(232,200,128,.55)}}
+.title-ember{animation:ember 3.2s ease-in-out infinite}
 </style>
 </head>
 <body>
 <header>
-  <h1>AI Engineering Factory</h1>
-  <p class="sub">Домашняя автономная фабрика разработки: задача → агенты → PR → проверка → релиз. Мерж — всегда человек.</p>
+  <h1 class="title-ember">КРИПТА АВТОМАТОНОВ</h1>
+  <p class="sub">AI Engineering Factory — там, где задачи обретают форму, а код — душу</p>
+  <div class="rune"><span>⚔ РОЛИ ⚔ ЦИКЛ ⚔ ГЕЙТЫ ⚔</span></div>
 </header>
 <main>
   <div class="grid">
-    <div class="card"><h3>22 роли</h3><p>Исполнитель, Тестировщик, Ревизор, Охранник, Факел, Фактчек, Механик, Санитар, Гейм-мастер, Глашатай и другие — с русскими именами.</p></div>
-    <div class="card"><h3>Автономный цикл</h3><p>GitHub Issue → worktree → headless-агент → PR → CI → мерж владельцем. Ноль ручных шагов, кроме финального решения.</p></div>
-    <div class="card"><h3>Гейты честности</h3><p>Факел против reward-hacking, Фактчек по первоисточникам, eval-harness 10 golden-задач против регрессий.</p></div>
-    <div class="card"><h3>Зрение и мосты</h3><p>OCR-зрение для изображений, веб-глаза (search/fetch), мосты Roblox/Blender, Telegram-уведомления.</p></div>
+    <div class="card"><h3>XXII Слуг Крипты</h3><p>Исполнитель, Тестировщик, Ревизор, Охранник, Факел, Фактчек, Механик, Санитар, Гейм-мастер, Глашатай — у каждого своё ремесло.</p></div>
+    <div class="card"><h3>Вечный Цикл</h3><p>Клеймо задачи на GitHub — и слуги сами куют: worktree, правки, pull request, испытания CI.</p></div>
+    <div class="card"><h3>Гейты Правосудия</h3><p>Факел бдит, чтобы никто не ослабил испытания. Фактчек требует первоисточника. Пепел не выдаёт себя за золото.</p></div>
+    <div class="card"><h3>Очи и Длани</h3><p>OCR-зрение для свитков-изображений, взор в сеть (search/fetch), мосты в Roblox и Blender, вестник Telegram.</p></div>
   </div>
 
-  <h2>Как это работает</h2>
-  <p>Владелец ставит задачу issue с лейблом <code>opencode</code>. Watcher подхватывает её, создаёт отдельный worktree и запускает агента-Исполнителя headless. Агент изучает репозиторий, вносит правку, коммитит с <code>closes #N</code>, открывает PR. CI гоняет тесты. Человек смотрит PR и мержит — это осознанный гейт, автомержа нет.</p>
+  <h2>Как куется решение</h2>
+  <p>Владыка оставляет метку — issue с клеймом <code>opencode</code>. Ночной страж подхватывает её, вырезает отдельную келью-worktree и пробуждает слугу-Исполнителя без свидетелей. Слуга изучает свод репозитория, вносит правку, запечатывает слова <code>closes&nbsp;#N</code> и выставляет творение на суд — pull request. Испытания CI сверяют металл. И лишь затем владыка взглядом решает: слить или отвергнуть.</p>
 
-  <h2>Принципы</h2>
-  <p><strong>Без галлюцинаций.</strong> Каждое утверждение — с источником: файл:строка, лог, зонд. Нет данных — «не проверено», а не догадка.</p>
-  <p><strong>Harness-native.</strong> Подписочные кредиты моделей, никакого API-биллинга за токены.</p>
-  <p><strong>Безопасность по умолчанию.</strong> Точечный allow-list команд, publish-гейты, защита от инъекций из issue-текста, мерж только человеком.</p>
+  <div class="gate">Ни один слуга не смеет сам венчать работу слиянием. Финальный гейт принадлежит человеку — всегда.</div>
 
-  <h2>Статус</h2>
-  <p>Развёрнута и верифицирована живыми PR; eval-прогон ролей — 10/10. Полная инструкция — в репозитории фабрики (<code>FACTORY.md</code>).</p>
+  <h2>Заповеди Крипты</h2>
+  <p><strong>Не изрекай ложного.</strong> Каждое слово — со свидетелем: файл и строка, лог, зонд. Нет свидетеля — говори «не проверено».</p>
+  <p><strong>Экономия крови и золота.</strong> Кредиты подписочные; никакие оркестраторы с API-биллингом не осквернят казну.</p>
+  <p><strong>Броня по умолчанию.</strong> Дозволения — списком, публикация — с подтверждения, инъекции из чужих свитков — отражены.</p>
+
+  <h2>Свиток Состояния</h2>
+  <p>Крипта развёрнута и обкатана живыми PR; хроника испытаний ролей — 13 из 13 золотых задач. Полный свод заповедей хранится в репозитории фабрики (<code>FACTORY.md</code>).</p>
 </main>
 <footer>
-  <p>Личный проект. Сайт собран и публикуется агентом-Глашатаем через git push. Обновления — коммитами в ветку Pages.</p>
+  <div class="rune"><span>†</span></div>
+  <p>Личная крипта владыки. Возводится и обновляется слугой-Глашатаем через git push в ветку Pages.</p>
 </footer>
 </body>
 </html>
