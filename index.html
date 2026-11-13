@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Engineering Factory — личная фабрика разработки</title>
+<style>
+:root{--ink:#1a1c20;--mut:#5b6470;--acc:#1454f4;--bg:#fbfcfe}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+header,main,footer{max-width:760px;margin:0 auto;padding:1.2rem}
+h1{font-size:1.7rem;margin:.2rem 0}
+.sub{color:var(--mut);margin:0 0 1.5rem}
+h2{font-size:1.25rem;margin-top:2rem}
+a{color:var(--acc)}
+code,pre{font:0.92rem/1.5 ui-monospace,monospace;background:#eef1f6;padding:.15rem .35rem;border-radius:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1rem 0}
+.card{border:1px solid #dfe3ea;border-radius:10px;padding:1rem;background:#fff}
+.card h3{margin:.1rem 0 .4rem;font-size:1.02rem}
+.card p{margin:0;color:var(--mut);font-size:.92rem}
+footer{color:var(--mut);font-size:.85rem;border-top:1px solid #e5e8ee;margin-top:2.5rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>AI Engineering Factory</h1>
+  <p class="sub">Домашняя автономная фабрика разработки: задача → агенты → PR → проверка → релиз. Мерж — всегда человек.</p>
+</header>
+<main>
+  <div class="grid">
+    <div class="card"><h3>22 роли</h3><p>Исполнитель, Тестировщик, Ревизор, Охранник, Факел, Фактчек, Механик, Санитар, Гейм-мастер, Глашатай и другие — с русскими именами.</p></div>
+    <div class="card"><h3>Автономный цикл</h3><p>GitHub Issue → worktree → headless-агент → PR → CI → мерж владельцем. Ноль ручных шагов, кроме финального решения.</p></div>
+    <div class="card"><h3>Гейты честности</h3><p>Факел против reward-hacking, Фактчек по первоисточникам, eval-harness 10 golden-задач против регрессий.</p></div>
+    <div class="card"><h3>Зрение и мосты</h3><p>OCR-зрение для изображений, веб-глаза (search/fetch), мосты Roblox/Blender, Telegram-уведомления.</p></div>
+  </div>
+
+  <h2>Как это работает</h2>
+  <p>Владелец ставит задачу issue с лейблом <code>opencode</code>. Watcher подхватывает её, создаёт отдельный worktree и запускает агента-Исполнителя headless. Агент изучает репозиторий, вносит правку, коммитит с <code>closes #N</code>, открывает PR. CI гоняет тесты. Человек смотрит PR и мержит — это осознанный гейт, автомержа нет.</p>
+
+  <h2>Принципы</h2>
+  <p><strong>Без галлюцинаций.</strong> Каждое утверждение — с источником: файл:строка, лог, зонд. Нет данных — «не проверено», а не догадка.</p>
+  <p><strong>Harness-native.</strong> Подписочные кредиты моделей, никакого API-биллинга за токены.</p>
+  <p><strong>Безопасность по умолчанию.</strong> Точечный allow-list команд, publish-гейты, защита от инъекций из issue-текста, мерж только человеком.</p>
+
+  <h2>Статус</h2>
+  <p>Развёрнута и верифицирована живыми PR; eval-прогон ролей — 10/10. Полная инструкция — в репозитории фабрики (<code>FACTORY.md</code>).</p>
+</main>
+<footer>
+  <p>Личный проект. Сайт собран и публикуется агентом-Глашатаем через git push. Обновления — коммитами в ветку Pages.</p>
+</footer>
+</body>
+</html>
